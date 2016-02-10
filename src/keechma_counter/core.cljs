@@ -27,9 +27,7 @@
    :html-element (.getElementById js/document "app")})
  
 
-(defonce running-app
-  "Atom that holds the currently running app map."
-  (clojure.core/atom))
+(defonce running-app (clojure.core/atom))
 
 (defn start-app!
   "Helper function that starts the application."

@@ -34,7 +34,7 @@
   (let [counter-sub (ui/subscription ctx :counter-value)]
     (fn []
       [:p
-       (str "Clicked: " @counter-sub " times")
+       (str "Clicked: " @counter-sub " times ")
        [:button {:on-click #(ui/send-command ctx :inc)} "+"]
        " "
        [:button {:on-click #(ui/send-command ctx :dec)} "-"]
