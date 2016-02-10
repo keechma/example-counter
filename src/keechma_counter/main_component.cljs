@@ -26,6 +26,8 @@
   3. Increment the counter if the current value is odd
   4. Increment the counter in async way (after 1 second)
 
+  ---
+
   Each of these actions sends the command to the controller
   by calling the `(ui/send-command ctx :command) function."
   [ctx]
