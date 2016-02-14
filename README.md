@@ -2,6 +2,8 @@
 
 Counter application example for the [Keechma framework](http://github.com/keechma/keechma).
 
+Read the [annotated source](http://keechma.com/annotated/counter.html).
+
 ## Setup
 
 Make sure you have [Leiningen](http://leiningen.org/) installed.
