@@ -1,6 +1,6 @@
 (ns keechma-counter.core
-  (:require [keechma-counter.counter-controller :as counter]
-            [keechma-counter.main-component :as main-component]
+  (:require [keechma-counter.controllers.counter :as counter]
+            [keechma-counter.ui.main :as main]
             [keechma.app-state :as app-state])
   (:require-macros [reagent.ratom :refer [reaction]]))
 
@@ -22,12 +22,11 @@
   - `:component` param holds all the component needed to render the app
   - `:subscriptions` param holds the application subscriptions"
   {:controllers {:counter (counter/->Controller)}
-   :components {:main (assoc main-component/component :topic :counter)}
+   :components {:main (assoc main/component :topic :counter)}
    :subscriptions {:counter-value counter-value-sub}
    :html-element (.getElementById js/document "app")})
- 
 
-(defonce running-app (clojure.core/atom))
+(defonce running-app (clojure.core/atom nil))
 
 (defn start-app!
   "Helper function that starts the application."
