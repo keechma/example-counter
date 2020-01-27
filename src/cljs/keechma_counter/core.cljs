@@ -26,7 +26,7 @@
    :subscriptions {:counter-value counter-value-sub}
    :html-element (.getElementById js/document "app")})
 
-(defonce running-app (clojure.core/atom))
+(defonce running-app (clojure.core/atom nil))
 
 (defn start-app!
   "Helper function that starts the application."
