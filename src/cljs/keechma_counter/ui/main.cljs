@@ -1,4 +1,4 @@
-(ns keechma-counter.main-component
+(ns keechma-counter.ui.main
   (:require [keechma.ui-component :as ui]))
 
 (defn inc-if-odd
@@ -20,7 +20,7 @@
   the current counter value.
 
   User can do one of four actions:
-  
+
   1. Increment the counter
   2. Decrement the counter
   3. Increment the counter if the current value is odd

@@ -4,43 +4,52 @@
   :license {:name "MIT"}
 
   :min-lein-version "2.5.3"
-  
-  :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "1.7.170"]
-                 [org.clojure/core.async "0.2.374"
-                  :exclusions [org.clojure/tools.reader]]
-                 [keechma "0.1.0-SNAPSHOT"]
-                 [reagent "0.6.0-alpha"]]
-  
-  :plugins [[lein-figwheel "0.5.0-6"]
-            [lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]
-            [michaelblume/lein-marginalia "0.9.0"]]
 
-  :source-paths ["src"]
+  :dependencies [[org.clojure/clojure "1.10.1"]
+                 [org.clojure/clojurescript "1.10.597"]
+                 [org.clojure/core.async "0.7.559"
+                  :exclusions [org.clojure/tools.reader]]
+                 [keechma "0.3.14"
+                  :exclusions [cljsjs/react-with-addons
+                               cljsjs/react-dom
+                               cljsjs/react-dom-server]]
+                 [reagent "0.9.1"]]
+
+  :plugins [[lein-figwheel "0.5.19"]
+            [lein-cljsbuild "1.1.7"]
+            [lein-marginalia "0.9.1"]]
+
+  :source-paths ["src/clj"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
   :cljsbuild {:builds
-              [{:id "dev"
-                :source-paths ["src"]
+              [{:id           "dev"
+                :source-paths ["src/cljs"]
 
                 ;; If no code is to be run, set :figwheel true for continued automagical reloading
-                :figwheel {:on-jsload "keechma-counter.core/on-js-reload"}
+                :figwheel     {:on-jsload "keechma-counter.core/on-js-reload"}
 
-                :compiler {:main keechma-counter.core
-                           :asset-path "js/compiled/out"
-                           :output-to "resources/public/js/compiled/keechma_counter.js"
-                           :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
+                :compiler     {:main                 keechma-counter.core
+                               :asset-path           "js/compiled/dev"
+                               :optimizations        :none
+                               :output-to            "resources/public/js/compiled/keechma_counter.js"
+                               :output-dir           "resources/public/js/compiled/dev"
+                               :source-map-timestamp true}}
+
                ;; This next build is an compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
-               {:id "min"
-                :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/keechma_counter.js"
-                           :main keechma-counter.core
-                           :optimizations :advanced
-                           :pretty-print false}}]}
+               {:id           "min"
+                :source-paths ["src/cljs"]
+                :compiler     {:main            keechma-counter.core
+                               :optimizations   :advanced
+                               :output-to       "resources/public/js/compiled/keechma_counter.js"
+                               :output-dir      "resources/public/js/compiled/min"
+                               :elide-asserts   true
+                               :closure-defines {goog.DEBUG false}
+                               :pretty-print    false}}
+               ]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
              ;; :server-port 3449 ;; default
